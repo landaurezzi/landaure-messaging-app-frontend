@@ -5,10 +5,9 @@ import MicIcon from '@mui/icons-material/Mic'
 import './Chat.css';
 import axios from './axios'
 
-const Chat = ({ messages }) => {
+const Chat = ({messages}) => {
     const [seed, setSeed] = useState("")
     const [input, setInput] = useState("")
-
     const sendMessage = async (e) => {
         e.preventDefault()
         await axios.post('/messages/new', {
@@ -19,6 +18,7 @@ const Chat = ({ messages }) => {
         })
         setInput("")
     }
+
     useEffect(() => {
         setSeed(Math.floor(Math.random() * 5000));
     }, [])
@@ -45,39 +45,14 @@ const Chat = ({ messages }) => {
             </div>
             <div className="chat__body">
                 {messages.map(message => (
-                    <p className={`chat__message ${message.received &&
-                    'chat_receiver'}`}>
+                    <p className={`chat__message ${message.received && 'chat__receiver'}`}>
                         <span className="chat__name">{message.name}</span>
-                        {message.message}
-                    <span className="chat__timestamp">
-                        {message.timestamp}
-                    </span>
+                            {message.message}
+                        <span className="chat__timestamp">
+                            {message.timestamp}
+                        </span>
                     </p>
                 ))}
-
-                <p className="chat__message">
-                    <span className="chat__name">Nabendu</span>
-                        This is a message
-                    <span className="chat__timestamp">
-                        {new Date().toUTCString()}
-                    </span>
-                </p>
-
-                <p className="chat__message chat__receiver">
-                    <span className="chat__name">Parag</span>
-                    This is a message back
-                    <span className="chat__timestamp">
-                        {new Date().toUTCString()}
-                    </span>
-                </p>
-                <p className="chat__message">
-                    <span className="chat__name">Nabendu</span>
-                    This is a message again
-                    <span className="chat__timestamp">
-                        {new Date().toUTCString()}
-                    </span>
-                </p>
-                
             </div>
             <div className="chat__footer">
                 <InsertEmoticon />

@@ -1,5 +1,5 @@
 import axios from 'axios'
 const instance = axios.create({
- baseURL: "https://csc3916-messaging-app.herokuapp.com/"
+ baseURL: "http://localhost:9000"
 })
 export default instance
