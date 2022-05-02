@@ -5,10 +5,11 @@ import React, { useEffect, useState } from 'react';
 import Pusher from 'pusher-js'
 import axios from './components/axios';
 import Login from './components/Login';
+import {useStateValue} from './components/StateProvider'
 
 function App() {
     const[messages, setMessages] = useState([])
-    const[user, setUser] = useState(null)
+    const[{user}, dispatch] = useStateValue()
 
     useEffect(() => {
         axios.get("/messages/sync").then(res => {
