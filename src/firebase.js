@@ -1,8 +1,11 @@
 import firebase from 'firebase/compat/app';
-import 'firebase/auth'; // for authentication
-import 'firebase/storage'; // for storage
-import 'firebase/database'; // for realtime database
-import 'firebase/firestore'; // for cloud firestore
+import 'firebase/compat/auth'; // for authentication
+//import { getAuth, onAuthStateChanged } from "firebase/auth";
+import 'firebase/compat/storage'; // for storage
+import 'firebase/compat/database'; // for realtime database
+import 'firebase/compat/firestore'; // for cloud firestore
+//const docRef = firebase.firestore().doc();
+//getDoc(docRef);
 
 const firebaseConfig = {
     apiKey: "AIzaSyCkKI2LZjXwa1pqLK8iH5GarrzwdIZiSlM",
