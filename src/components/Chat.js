@@ -5,16 +5,17 @@ import MicIcon from '@mui/icons-material/Mic'
 import './Chat.css';
 import axios from './axios'
 
-const Chat = ({messages}) => {
+const Chat = ({messages, room, theUser}) => {
     const [seed, setSeed] = useState("")
     const [input, setInput] = useState("")
     const sendMessage = async (e) => {
         e.preventDefault()
         await axios.post('/messages/new', {
             message: input,
-            name: "thewebdev",
+            name: theUser?.displayName,
             timestamp: new Date().toUTCString(),
-            received: true
+            received: true,
+            roomID: room
         })
         setInput("")
     }

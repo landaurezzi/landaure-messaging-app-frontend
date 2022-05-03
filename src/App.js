@@ -10,12 +10,20 @@ import {useStateValue} from './components/StateProvider'
 function App() {
     const[messages, setMessages] = useState([])
     const[{user}, dispatch] = useStateValue()
+    const [currentRoom, setRoom] = useState("1")
 
     useEffect(() => {
         axios.get("/messages/sync").then(res => {
             setMessages(res.data)
         })
     }, [])
+
+    const changeRoom = (roomNum) => {
+        setRoom(roomNum)
+        axios.get("/messages/sync?room=" + roomNum).then(res => {
+            setMessages(res.data)
+        })
+    };
 
     useEffect(() => {
         const pusher = new Pusher('e9eb5617509a018ef074', {
@@ -38,8 +46,8 @@ function App() {
         <div className="app">
             {!user ? <Login /> : (
             <div className="app_body">
-                <Sidebar />
-                <Chat messages={messages} />
+                <Sidebar roomForChat={changeRoom}/>
+                <Chat messages={messages} room={currentRoom} theUser ={user}/>
             </div>
             )}
         </div>

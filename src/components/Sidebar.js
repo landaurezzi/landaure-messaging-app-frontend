@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './Sidebar.css'
 import DonutLargeIcon from '@mui/icons-material/DonutLarge'
 import ChatIcon from '@mui/icons-material/Chat'
@@ -8,8 +8,11 @@ import { SearchOutlined} from "@mui/icons-material";
 import SidebarChat from "./SidebarChat";
 import { useStateValue } from './StateProvider'
 
-const Sidebar = () => {
+
+const Sidebar = ({ roomForChat }) => {
     const[{user}, dispatch] = useStateValue()
+
+
     return(
         <div className="sidebar">
             <div className="sidebar__header">
@@ -33,7 +36,12 @@ const Sidebar = () => {
                 </div>
             </div>
             <div className="sidebar__chats">
-                <SidebarChat />
+                <div onClick= {() => roomForChat("1")}>
+                    <SidebarChat roomName="Chat Room 1"/>
+                </div>
+                <div onClick= {() => roomForChat("2")}>
+                    <SidebarChat roomName="Chat Room 2"/>
+                </div>
             </div>
         </div>
     )
