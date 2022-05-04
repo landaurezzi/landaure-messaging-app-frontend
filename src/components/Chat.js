@@ -6,7 +6,7 @@ import './Chat.css';
 import axios from './axios'
 import { useStateValue } from './StateProvider';
 
-const Chat = ({messages}) => {
+const Chat = ({messages, room, theUser}) => {
     const [seed, setSeed] = useState("")
     const [input, setInput] = useState("")
     const [{user}, dispatch] = useStateValue()
@@ -14,9 +14,10 @@ const Chat = ({messages}) => {
         e.preventDefault()
         await axios.post('/messages/new', {
             message: input,
-            name: user.displayName,
+            name: theUser?.displayName,
             timestamp: new Date().toUTCString(),
-            received: true
+            received: true,
+            roomID: room
         })
         setInput("")
     }
